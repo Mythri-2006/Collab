@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Technology Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      border-bottom: 2px solid #2a2a2a;
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #00e0ff;
+    }
+
+    .status {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .ai-input {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    textarea {
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: none;
+      resize: vertical;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #00e0ff;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #00c0d1;
+    }
+
+    .response {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #2a2a2a;
+      border-radius: 5px;
+      min-height: 40px;
+    }
+
+    .metric {
+      font-size: 36px;
+      font-weight: bold;
+      color: #00ff88;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+      color: #aaa;
+      border-top: 1px solid #2a2a2a;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>🔍 AI Technology Dashboard</header>
+
+  <div class="dashboard">
+
+    <div class="card">
+      <h2>🤖 AI System Status</h2>
+      <div class="status" id="aiStatus">Checking...</div>
+    </div>
+
+    <div class="card">
+      <h2>📊 Usage Metrics</h2>
+      <div>Requests Today: <div class="metric" id="requestsCount">0</div></div>
+      <div>Latency (ms): <div class="metric" id="latency">-</div></div>
+    </div>
+
+    <div class="card">
+      <h2>💬 Ask the AI</h2>
+      <div class="ai-input">
+        <textarea id="userInput" rows="4" placeholder="Type your question..."></textarea>
+        <button onclick="askAI()">Send</button>
+        <div class="response" id="aiResponse">Awaiting input...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">AI Dashboard © 2025 | Powered by JavaScript</div>
+
+  <script>
+    // Simulate AI system status
+    function updateStatus() {
+      const statusEl = document.getElementById('aiStatus');
+      const statuses = ['Online ✅', 'Processing ⚙️', 'Idle ⏳', 'Error ❌'];
+      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+      statusEl.textContent = randomStatus;
+    }
+
+    setInterval(updateStatus, 5000); // update every 5 seconds
+    updateStatus(); // initial call
+
+    // Simulate usage metrics
+    function updateMetrics() {
+      const requestsEl = document.getElementById('requestsCount');
+      const latencyEl = document.getElementById('latency');
+      let requests = Math.floor(Math.random() * 1000 + 100);
+      let latency = (Math.random() * 500 + 50).toFixed(2);
+      requestsEl.textContent = requests;
+      latencyEl.textContent = latency;
+    }
+
+    setInterval(updateMetrics, 8000);
+    updateMetrics();
+
+    // Simulate AI response
+    function askAI() {
+      const input = document.getElementById('userInput').value.trim();
+      const responseEl = document.getElementById('aiResponse');
+      if (!input) {
+        responseEl.textContent = "Please enter a question.";
+        return;
+      }
+
+      responseEl.textContent = "Thinking...";
+
+      setTimeout(() => {
+        // Fake AI response
+        responseEl.textContent = "AI says: " + generateFakeAIResponse(input);
+      }, 1500);
+    }
+
+    // Basic fake AI logic
+    function generateFakeAIResponse(input) {
+      const replies = [
+        "That's a fascinating question!",
+        "Let me analyze that further.",
+        "Based on my data, it seems plausible.",
+        "Here's what I found: [placeholder response]",
+        "Unfortunately, I can't answer that right now."
+      ];
+      return replies[Math.floor(Math.random() * replies.length)];
+    }
+  </script>
+</body>
+</html>
